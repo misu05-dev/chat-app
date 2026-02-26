@@ -38,6 +38,6 @@ app.post("/send_message", (req, res) => {
     res.json({ status: "sent" });
 });
 
-server.listen(3000, () => {
+server.listen(5000, () => {
     console.log("Socket server running on port 3000");
 });
