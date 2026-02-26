@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MessageController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::controller(AuthController::class)->group(function () {
 
 
 Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/getAllUsers', [UserController::class, 'getAllUsers']);
     Route::get('/messages', [MessageController::class, 'index']);
     Route::post('/messages', [MessageController::class, 'store']);
 });
