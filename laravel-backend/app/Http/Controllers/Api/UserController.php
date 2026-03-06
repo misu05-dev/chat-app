@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     //get all users
     public function getAllUsers()
     {
-        $users = User::get();
+        $users = User::whereNot('id', Auth::user()->id)->get();
         return sendResponse($users, 200, "Users get successfully");
     }
 }

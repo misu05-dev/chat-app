@@ -28,7 +28,7 @@ class MessageController extends Controller
         ]);
 
         // send to Node socket server
-        Http::post('http://localhost:3000/send_message', [
+        Http::post('http://localhost:5000/send_message', [
             'sender_id' => $message->sender_id,
             'receiver_id' => $message->receiver_id,
             'message' => $message->message,

@@ -23,13 +23,14 @@ io.on("connection", (socket) => {
 
     socket.on("join", (userId) => {
         socket.join("user_" + userId);
+        console.log(`User ${userId} joined room user_${userId}`);
     });
 });
 
 // Laravel will call this
 app.post("/send_message", (req, res) => {
     const { sender_id, receiver_id, message } = req.body;
-
+    console.log("Received message event:", req.body);
     io.to("user_" + receiver_id).emit("receive_message", {
         sender_id,
         message
@@ -39,5 +40,5 @@ app.post("/send_message", (req, res) => {
 });
 
 server.listen(5000, () => {
-    console.log("Socket server running on port 3000");
+    console.log("Socket server running on port 5000");
 });
