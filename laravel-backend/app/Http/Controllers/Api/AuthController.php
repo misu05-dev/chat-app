@@ -16,8 +16,15 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'image' => 'nullable'
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = uniqid() . '_' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public', $imageName);
+        }
 
         $user = User::create([
             'name' => $request->name,

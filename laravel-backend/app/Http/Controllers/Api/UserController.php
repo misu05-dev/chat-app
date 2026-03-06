@@ -16,6 +16,9 @@ class UserController extends Controller
     public function getAllUsers()
     {
         $users = User::whereNot('id', Auth::user()->id)->get();
+        foreach ($users as $user) {
+            $user->image = asset('storage/' . $user->image);
+        }
         return sendResponse($users, 200, "Users get successfully");
     }
 }
